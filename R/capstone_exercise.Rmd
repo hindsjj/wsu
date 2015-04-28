@@ -13,6 +13,7 @@ knitr::opts_chunk$set(echo=FALSE, fig.path="../figures/secondtry_", fig.height=5
 ```{r, load_libraries, results="hide", message=FALSE}
 library(dplyr)
 library(ggplot2)
+library(knitr)
 ```
 
 
@@ -26,4 +27,14 @@ Below is a plot of GDP vs Year for three countries: Australia, Canada, and Japan
 gm_3countries <- gapminder %>%
   filter(country=="Canada" | country=="Australia" | country=="Japan")
 ggplot(gm_3countries, aes(x=year, y=gdpPercap)) + geom_point(aes(color=country)) + facet_wrap(~ country)
+```
+
+The plots below show the MEAN, MAX, and MIN life expectancies for each continent for year 2007.
+
+```{r, life_exp_per_continent}
+(lepc <- gapminder %>%
+  filter(year==2007) %>%
+  group_by(continent) %>%
+  summarize(meanlifeExp = mean(lifeExp), maxlifeExp = max(lifeExp), minlifeExp = min(lifeExp)) %>%
+  kable)
 ```
