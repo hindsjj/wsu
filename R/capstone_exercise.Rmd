@@ -1,0 +1,29 @@
+---
+title: "Capstone Exercise"
+author: "jhinds"
+date: "April 28, 2015"
+output: html_document
+---
+
+```{r, global_knitr_options, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, fig.path="../figures/secondtry_", fig.height=5, fig.width=7)
+```
+
+
+```{r, load_libraries, results="hide", message=FALSE}
+library(dplyr)
+library(ggplot2)
+```
+
+
+```{r, load_data}
+gapminder <- read.csv("../data/gapminder.csv")
+```
+
+Below is a plot of GDP vs Year for three countries: Australia, Canada, and Japan.  Trends are similar.
+
+```{r, gdp_three_countries}
+gm_3countries <- gapminder %>%
+  filter(country=="Canada" | country=="Australia" | country=="Japan")
+ggplot(gm_3countries, aes(x=year, y=gdpPercap)) + geom_point(aes(color=country)) + facet_wrap(~ country)
+```
