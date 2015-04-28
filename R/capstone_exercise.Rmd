@@ -38,3 +38,9 @@ The plots below show the MEAN, MAX, and MIN life expectancies for each continent
   summarize(meanlifeExp = mean(lifeExp), maxlifeExp = max(lifeExp), minlifeExp = min(lifeExp)) %>%
   kable)
 ```
+
+Histogram of global life expectancy.
+
+```{r, hist_global_life_expectancy}
+ggplot(gapminder, aes(x=lifeExp)) + geom_histogram(binwidth=2.5, fill="orchid", color="black")
+```
